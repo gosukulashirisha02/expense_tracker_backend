@@ -1,17 +1,32 @@
 from fastapi import FastAPI
 import mysql.connector
-
-conn_obj=mysql.connector.connect(
-    host="localhost",
-    user="root",
-    database="expense_tracker",
-    password="123456"
-)
-cursor_obj=conn_obj.cursor(dictionary=True)
+from fastapi.middleware.cors import CORSMiddleware
+import os
 app=FastAPI()
 
 
-cursor.execute("""
+# -------------------- CORS POLICY --------------------
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # Allow all origins
+    allow_credentials=True,
+    allow_methods=["*"],   # Allow all HTTP methods
+    allow_headers=["*"]    # Allow all headers
+)
+
+conn_obj=mysql.connector.connect(
+    host=os.getenv("db_host"),
+    user=os.getenv("db_user"),
+    password=os.getenv("db_password"),
+    database=os.getenv("db_name"),
+    port=os.getenv("db_port")
+)
+cursor_obj=conn_obj.cursor(dictionary=True)
+
+
+
+cursor_obj.execute("""
 CREATE TABLE IF NOT EXISTS expenses(
     expense_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
@@ -20,7 +35,7 @@ CREATE TABLE IF NOT EXISTS expenses(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """)
-conn.commit()
+conn_obj.commit()
 
 
 @app.post("/add_expense")
