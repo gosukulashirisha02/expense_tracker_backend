@@ -1,0 +1,86 @@
+EXPENSE TRACKER APPLICATION
+Full Stack Product Documentation
+
+1. Project Overview
+Expense Tracker is a full-stack web application used to manage and analyze personal expenses.
+It supports CRUD operations and provides analytics for better financial tracking.
+
+Tech Stack:
+Frontend: Streamlit
+Backend: FastAPI
+Database: MySQL
+
+2. System Architecture
+
+            ┌──────────────────────┐
+            │   Streamlit UI       │
+            │   (Frontend)         │
+            └─────────┬────────────┘
+                      │ HTTP Requests (requests)
+                      ▼
+            ┌──────────────────────┐
+            │   FastAPI Backend    │
+            │   REST API Server    │
+            └─────────┬────────────┘
+                      │ SQL Queries
+                      ▼
+            ┌──────────────────────┐
+            │     MySQL DB         │
+            └──────────────────────┘
+
+            3. Frontend (Streamlit)
+3.Frontend(streamlit)
+Frontend provides an interactive UI for users to manage expenses and communicates with backend APIs.
+Features:
+Add Expense
+View Expense
+Update Expense
+Delete Expense
+Search by Category
+Sort Expenses
+Filter Expenses
+Analyze Spending (Chart + Summary)
+API Used:
+POST /add_expense
+GET /get_expenses
+PUT /update_expense/{id}
+DELETE /delete_expense/{id}
+GET /search_expense
+GET /sort_expenses
+GET /filter_expenses
+GET /analyze_expenses
+Libraries:
+Streamlit
+Pandas
+Requests
+
+4. Backend (FastAPI)
+Backend handles business logic and database operations using REST APIs.
+Features:
+CRUD operations
+Sorting & Filtering
+Data analytics (SUM, AVG, GROUP BY)
+MySQL integration
+Database Schema
+expense_id (Primary Key)
+title (VARCHAR)
+amount (DECIMAL)
+category (VARCHAR)
+created_at (TIMESTAMP)
+API Endpoints:
+POST /add_expense
+GET /get_expenses
+PUT /update_expense/{id}
+DELETE /delete_expense/{id}
+GET /search_expense
+GET /sort_expenses
+GET /filter_expenses
+GET /analyze_expenses
+Libraries:
+FastAPI
+MySQL Connector
+Python
+
+6.Conclusion
+This project demonstrates a full-stack expense tracking system with API integration, 
+database handling, and data visualization.
