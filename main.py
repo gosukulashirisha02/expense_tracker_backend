@@ -5,6 +5,7 @@ import os
 app=FastAPI()
 
 
+
 # -------------------- CORS POLICY --------------------
 
 app.add_middleware(
@@ -15,13 +16,14 @@ app.add_middleware(
     allow_headers=["*"]    # Allow all headers
 )
 
-conn_obj=mysql.connector.connect(
+conn_obj = mysql.connector.connect(
     host=os.getenv("db_host"),
+    port=int(os.getenv("db_port")),
     user=os.getenv("db_user"),
     password=os.getenv("db_password"),
     database=os.getenv("db_name"),
-    port=os.getenv("db_port")
-)
+
+)   
 cursor_obj=conn_obj.cursor(dictionary=True)
 
 
