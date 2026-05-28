@@ -38,6 +38,12 @@ CREATE TABLE IF NOT EXISTS expenses(
 )
 """)
 conn_obj.commit()
+@app.get("/")
+def home():
+    
+    return{
+        "message":"API Running Successfully"
+    }
 
 
 @app.post("/add_expense")
